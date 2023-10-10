@@ -18,8 +18,6 @@ const handleClick = () => {
   } catch (error) {
     console.error("invariant error")
   }
-
-
 }
 </script>
 
