@@ -8,7 +8,6 @@ const drop = (e) => {
     const title = e.dataTransfer.getData("title");
     const x = e.offsetX - 100;
     const y = e.offsetY - 30;
-    console.log(`id: ${id}, title: ${title} x: ${x}, y: ${y}`);
     list.value.push({
       id: id,
       title: title,

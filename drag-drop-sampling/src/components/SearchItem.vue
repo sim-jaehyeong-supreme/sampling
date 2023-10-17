@@ -13,8 +13,6 @@ const toggleShowingDetail = () => {
 };
 
 const dragStart = (sub, event) => {
-  console.log("sub", sub, "event", event);
-
   if (event.dataTransfer) {
     event.dataTransfer.effectAllowed = "copy";
     event.dataTransfer.dropEffect = "copy";
@@ -25,7 +23,7 @@ const dragStart = (sub, event) => {
 }
 
 const dragEnd = (sub, event) => {
-  console.log("sub", sub, "event", event);
+  //何もしない
 }
 </script>
 
