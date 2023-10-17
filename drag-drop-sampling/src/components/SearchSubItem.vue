@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-const { sub } = defineProps({
-  sub: Object,
+const { item } = defineProps({
+  item: Object,
 });
 
 const emits = defineEmits(["dragstart", "dragend"]);
@@ -9,12 +9,12 @@ const isDragging = ref(false);
 
 const handleDragStart = (event) => {
   isDragging.value = true;
-  emits("dragstart", sub, event);
+  emits("dragstart", item, event);
 }
 
 const handleDragEnd = (event) => {
   isDragging.value = false;
-  emits("dragend", sub, event);
+  emits("dragend", item, event);
 }
 </script>
 
@@ -25,7 +25,7 @@ const handleDragEnd = (event) => {
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
   >
-    <span>{{ sub.title }}</span>
+    <span>{{ item.subTitle }}</span>
   </div>
 </template>
 

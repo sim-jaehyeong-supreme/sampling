@@ -2,7 +2,8 @@
 import { ref } from "vue";
 import SideBarArrow from "@/components/icons/SideBarArrow.vue";
 import SearchSubItem from "@/components/SearchSubItem.vue";
-const { title, subItems } = defineProps({
+const { id, title, subItems } = defineProps({
+  id: String,
   title: String,
   subItems: Array,
 });
@@ -12,13 +13,15 @@ const toggleShowingDetail = () => {
   isShowingDetail.value = !isShowingDetail.value;
 };
 
-const dragStart = (sub, event) => {
+const dragStart = (item, event) => {
   if (event.dataTransfer) {
     event.dataTransfer.effectAllowed = "copy";
     event.dataTransfer.dropEffect = "copy";
 
-    event.dataTransfer.setData("id", sub.id);
-    event.dataTransfer.setData("title", sub.title);
+    event.dataTransfer.setData("id", id);
+    event.dataTransfer.setData("subId", item.subId);
+    event.dataTransfer.setData("title", title);
+    event.dataTransfer.setData("subTitle", item.subTitle);
   }
 }
 
@@ -37,7 +40,7 @@ const dragEnd = (sub, event) => {
 
     <!-- SubItems -->
     <div v-show="isShowingDetail">
-      <SearchSubItem v-for="sub in subItems" :key="sub.id" :sub="sub" @dragstart="dragStart" @dragend="dragEnd" />
+      <SearchSubItem v-for="sub in subItems" :key="sub.subId" :item="sub" @dragstart="dragStart" @dragend="dragEnd" />
     </div>
   </div>
 </template>

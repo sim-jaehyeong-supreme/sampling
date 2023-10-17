@@ -9,20 +9,20 @@ const searchItems = [
     title: "dataset1",
     subItems: [
       {
-        id: "1",
-        title: "subitem1",
+        subId: "1",
+        subTitle: "subitem1",
       },
       {
-        id: "2",
-        title: "subitem2",
+        subId: "2",
+        subTitle: "subitem2",
       },
       {
-        id: "3",
-        title: "subitem3",
+        subId: "3",
+        subTitle: "subitem3",
       },
       {
-        id: "4",
-        title: "subitem4",
+        subId: "4",
+        subTitle: "subitem4",
       }
     ]
   },
@@ -31,20 +31,20 @@ const searchItems = [
     title: "dataset5",
     subItems: [
       {
-        id: "5",
-        title: "subitem5",
+        subId: "5",
+        subTitle: "subitem5",
       },
       {
-        id: "6",
-        title: "subitem6",
+        subId: "6",
+        subTitle: "subitem6",
       },
       {
-        id: "7",
-        title: "subitem7",
+        subId: "7",
+        subTitle: "subitem7",
       },
       {
-        id: "8",
-        title: "subitem8",
+        subId: "8",
+        subTitle: "subitem8",
       }
     ]
   },
@@ -53,20 +53,20 @@ const searchItems = [
     title: "node",
     subItems: [
       {
-        id: "9",
-        title: "subnode9",
+        subId: "9",
+        subTitle: "subnode9",
       },
       {
-        id: "10",
-        title: "subnode10",
+        subId: "10",
+        subTitle: "subnode10",
       },
       {
-        id: "11",
-        title: "subnode11",
+        subId: "11",
+        subTitle: "subnode11",
       },
       {
-        id: "12",
-        title: "subnode12",
+        subId: "12",
+        subTitle: "subnode12",
       }
     ]
   }
@@ -79,7 +79,7 @@ const searchItems = [
     <input class="search-input" type="search" v-model="searchText" placeholder="search..."/>
     <div class="search-items">
       <template v-for="item in searchItems" :key="item.id">
-        <SearchItem :title="item.title" :subItems="item.subItems"/>
+        <SearchItem :id="item.id" :title="item.title" :subItems="item.subItems"/>
       </template>
     </div>
   </div>
