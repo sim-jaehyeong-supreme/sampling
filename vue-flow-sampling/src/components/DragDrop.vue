@@ -9,8 +9,9 @@ defineProps({
 
 const id = ref(0);
 const getNewId = () => `dndnode_${id.value++}`;
+const vueFlowInstanceRef = ref(null);
 
-const { findNode, onConnect, addEdges, addNodes, project, vueFlowRef } =
+const { findNode, onConnect, addEdges, addNodes, project, vueFlowRef, onPaneReady } =
   useVueFlow({
     nodes: [
       {
@@ -21,6 +22,17 @@ const { findNode, onConnect, addEdges, addNodes, project, vueFlowRef } =
       },
     ],
   });
+
+onPaneReady((vueFlowInstance) => {
+  vueFlowInstanceRef.value = vueFlowInstance;
+});
+
+const stop = watch(vueFlowInstanceRef, (instance) => {
+  if (instance) {
+    instance.fitView({ padding: 1, includeHiddenNodes: true });
+    stop();
+  }
+});
 
 const onDragOver = (event) => {
   event.preventDefault();

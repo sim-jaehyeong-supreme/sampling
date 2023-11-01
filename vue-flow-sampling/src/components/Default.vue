@@ -3,7 +3,7 @@ import { Panel, VueFlow, isNode, useVueFlow } from "@vue-flow/core";
 import { Background } from "@vue-flow/background";
 import { Controls } from "@vue-flow/controls";
 import { MiniMap } from "@vue-flow/minimap";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { initialElements } from "@/initial-elements.js";
 import IconReset from "@/components/icons/IconReset.vue";
 import IconShuffle from "@/components/icons/IconShuffle.vue";
@@ -29,8 +29,14 @@ const elements = ref(initialElements);
 const vueFlowInstanceRef = ref(null);
 
 onPaneReady((vueFlowInstance) => {
-  vueFlowInstance.fitView({ padding: 1, includeHiddenNodes: true });
   vueFlowInstanceRef.value = vueFlowInstance;
+});
+
+const stop = watch(vueFlowInstanceRef, (instance) => {
+  if (instance) {
+    instance.fitView({ padding: 1, includeHiddenNodes: true });
+    stop();
+  }
 });
 
 onNodeDragStop((e) => {

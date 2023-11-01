@@ -7,11 +7,11 @@ const selectedTabName = ref('default');
 </script>
 
 <template>
-  <el-tabs v-model="selectedTabName" class="tabs">
-    <el-tab-pane label="Default" name="default" class="tab-pane">
+  <el-tabs v-model="selectedTabName" class="tabs" :stretch="true">
+    <el-tab-pane label="Default" name="default" class="tab-pane" :lazy="true">
       <Default title="Default"/>
     </el-tab-pane>
-    <el-tab-pane label="Drag & Drop" name="dnd"><DragDrop title="Drag & Drop" /></el-tab-pane>
+    <el-tab-pane label="Drag & Drop" name="dnd" :lazy="true"><DragDrop title="Drag & Drop" /></el-tab-pane>
   </el-tabs>
 </template>
 
