@@ -39,16 +39,12 @@ const stop = watch(vueFlowInstanceRef, (instance) => {
 const onSave = () => {
   currentHistoryIdx.value++;
   storageData.value.history.push(JSON.stringify(toObject()));
-  console.log("onSave", "JSON.stringify(toObject())", JSON.stringify(toObject()));
 };
 
 const onUndo = () => {
   if (currentHistoryIdx.value === 0) return;
   currentHistoryIdx.value--;
   const flow = JSON.parse(storageData.value.history[currentHistoryIdx.value]);
-  console.log("onUndo", "JSON.stringify(toObject())", JSON.stringify(toObject()));
-  console.log(storageData.value.history)
-
   if (!flow) currentHistoryIdx.value++;
   else {
     const [x = 0, y = 0] = flow.position;

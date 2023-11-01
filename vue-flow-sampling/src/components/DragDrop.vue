@@ -64,7 +64,6 @@ const onDrop = (event) => {
     const stop = watch(
       () => node.dimensions,
       (dimensions) => {
-        console.log("watch", node, dimensions);
         if (dimensions.width > 0 && dimensions.height > 0) {
           node.position = {
             x: node.position.x - node.dimensions.width / 2,
