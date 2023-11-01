@@ -96,8 +96,9 @@ onConnect((params) => addEdges(params));
 .dndflow {
   flex-direction: column;
   display: flex;
-  height: 95%;
+  height: 90%;
 }
+
 .dndflow aside {
   color: #fff;
   font-weight: 700;

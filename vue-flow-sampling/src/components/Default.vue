@@ -134,7 +134,7 @@ const toggleClass = () => (dark.value = !dark.value);
 }
 
 .basicflow {
-  height: 85%;
+  height: 90%;
 }
 
 .vue-flow__minimap {
