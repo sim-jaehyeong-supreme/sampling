@@ -1,7 +1,7 @@
 <script setup>
 import { VueFlow } from "@vue-flow/core";
 import { ref } from "vue";
-import SaveUndoRedoControls from "@/components/SaveUndoRedoControls.vue";
+import SaveUndoRedoControls from "@/components/example/SaveUndoRedoControls.vue";
 
 defineProps({
   title: String,

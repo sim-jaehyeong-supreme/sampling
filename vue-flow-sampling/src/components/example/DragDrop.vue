@@ -1,7 +1,7 @@
 <script setup>
 import { VueFlow, useVueFlow } from "@vue-flow/core";
 import { nextTick, watch, ref } from "vue";
-import DragDropSidebar from "@/components/DragDropSidebar.vue";
+import DragDropSidebar from "@/components/example/DragDropSidebar.vue";
 
 defineProps({
   title: String,

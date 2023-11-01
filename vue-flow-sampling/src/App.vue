@@ -1,23 +1,28 @@
 <script setup>
-import Default from "@/components/Default.vue";
-import DragDrop from "@/components/DragDrop.vue";
-import SaveUndoRedo from "@/components/SaveUndoRedo.vue";
+import Custom from "@/components/custom/Custom.vue";
+
+import Default from "@/components/example/Default.vue";
+import DragDrop from "@/components/example/DragDrop.vue";
+import SaveUndoRedo from "@/components/example/SaveUndoRedo.vue";
 
 import { ref } from "vue";
-const selectedTabName = ref("default");
+const selectedTabName = ref("custom");
 </script>
 
 <template>
   <el-tabs v-model="selectedTabName" class="tabs" :stretch="true">
+    <el-tab-pane label="Custom" name="custom" :lazy="true">
+      <Custom title="Custom" />
+    </el-tab-pane>
     <el-tab-pane label="Default" name="default" :lazy="true">
       <Default title="Default" />
     </el-tab-pane>
     <el-tab-pane label="Drag & Drop" name="dnd" :lazy="true"
-      ><DragDrop title="Drag & Drop"
-    /></el-tab-pane>
+      ><DragDrop title="Drag & Drop" />
+    </el-tab-pane>
     <el-tab-pane label="Save & Undo & Redo" name="sur" :lazy="true"
-      ><SaveUndoRedo title="Save & Undo & Redo"
-    /></el-tab-pane>
+      ><SaveUndoRedo title="Save & Undo & Redo" />
+    </el-tab-pane>
   </el-tabs>
 </template>
 
