@@ -47,7 +47,6 @@ const fitView = () => {
   vueFlowInstanceRef.value.fitView({ padding: 1, includeHiddenNodes: true });
 }
 
-
 onNodeDragStop((e) => {
   console.log("drag stop", e);
 });
@@ -66,8 +65,9 @@ const onDragOver = (event) => {
 }
 
 const onDrop = (event) => {
-  const type = event.dataTransfer?.getData("application/vueflow");
+  const { id, name} = JSON.parse(event.dataTransfer?.getData("application/vueflow"));
   const { left, top} = vueFlowRef.value.getBoundingClientRect();
+
   const position = project({
     x: event.clientX - left,
     y: event.clientY - top,
@@ -75,9 +75,9 @@ const onDrop = (event) => {
 
   const newNode = {
     id: getNewId(),
-    type,
+    type: "default",
     position,
-    label: `${type} node`,
+    label: name,
   };
 
   addNodes([newNode]);
