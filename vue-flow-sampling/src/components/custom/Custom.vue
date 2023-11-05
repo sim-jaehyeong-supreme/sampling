@@ -6,6 +6,7 @@ import { MiniMap } from "@vue-flow/minimap";
 import { nextTick, ref, watch } from "vue";
 import CustomSidebar from "@/components/custom/CustomSidebar.vue";
 import CustomPanel from "@/components/custom/CustomPanel.vue";
+import CustomDialog from "@/components/custom/CustomDialog.vue";
 
 defineProps({
   title: String,
@@ -13,7 +14,8 @@ defineProps({
 
 const {
   onPaneReady,
-  onNodeDragStop,
+  // onNodeDragStop,
+  onNodeClick,
   onConnect,
   findNode,
   addEdges,
@@ -26,6 +28,9 @@ const {
 // const elements = ref([]);
 const vueFlowInstanceRef = ref(null);
 const isDoneFitView = ref(false);
+const isVisibleDialog = ref(false);
+const currentModel = ref(null);
+
 
 onPaneReady((vueFlowInstance) => {
   vueFlowInstanceRef.value = vueFlowInstance;
@@ -47,9 +52,9 @@ const fitView = () => {
   vueFlowInstanceRef.value.fitView({ padding: 1, includeHiddenNodes: true });
 }
 
-onNodeDragStop((e) => {
-  console.log("drag stop", e);
-});
+// onNodeDragStop((e) => {
+//   console.log("drag stop", e);
+// });
 
 onConnect((params) => addEdges(params));
 
@@ -100,10 +105,20 @@ const onDrop = (event) => {
   });
 }
 
+onNodeClick((e) => {
+  console.log("onNodeClick");
+  isVisibleDialog.value = true;
+  currentModel.value = e.node;
+});
+
+const onToggleIsVisibleDialog = (value) => {
+  isVisibleDialog.value = value;
+}
+
 </script>
 
 <template>
-  <div class="title" style="text-align: center">{{ title }}</div>
+  <div class="title" style="text-align: center">{{ title }} </div>
   <div class="dndflow" @drop="onDrop">
     <custom-sidebar />
     <vue-flow
@@ -120,6 +135,11 @@ const onDrop = (event) => {
       <controls />
     </vue-flow>
   </div>
+  <custom-dialog 
+     v-model:isVisibleDialog="isVisibleDialog"
+     v-model:model="currentModel"
+    @update:isVisibleDialog="onToggleIsVisibleDialog"
+    />
 </template>
 
 <style scoped lang="scss">
