@@ -24,11 +24,13 @@ const nodeTypes = {
 const {
   onPaneReady,
   onNodeClick,
+  onEdgeClick,
   onConnect,
   findNode,
   findEdge,
   addEdges,
   addNodes,
+  removeEdges,
   project,
   vueFlowRef,
   toObject,
@@ -66,7 +68,7 @@ const fitView = () => {
 
 onConnect((params) => {
   // 禁止
-  // 1. dataSource bottom -> dataset top
+  // 1. dataSource bottom <-> dataset top
   if (
     params.sourceHandle.includes("dataSource") && params.sourceHandle.includes("bottom") &&
     params.targetHandle.includes("dataset") && params.targetHandle.includes("top")
@@ -75,7 +77,19 @@ onConnect((params) => {
     return;
   }
 
-  // 2. node top -> dataset top
+  // 2. dataSource bottom <-> node bottom
+  if (
+    params.sourceHandle.includes("dataSource") && params.sourceHandle.includes("bottom") &&
+    params.targetHandle.includes("node") && params.targetHandle.includes("bottom") ||
+
+    params.sourceHandle.includes("node") && params.sourceHandle.includes("bottom") &&
+    params.targetHandle.includes("dataSource") && params.targetHandle.includes("bottom")
+  ) {
+    alert("禁止：dataSource bottom <-> node bottom");
+    return;
+  }
+
+  // 3. node top <-> dataset top
   if (
     params.sourceHandle.includes("node") && params.sourceHandle.includes("top") &&
     params.targetHandle.includes("dataset") && params.targetHandle.includes("top") ||
@@ -86,8 +100,14 @@ onConnect((params) => {
     return;
   }
 
-  addEdges(params);
+  addEdges([{...params, type: "smoothstep"}]);
 });
+
+onEdgeClick(({ edge }) => {
+  if (confirm(`線を削除しますか？`)) {
+    removeEdges([edge]);
+  } 
+})
 
 // DnD feature
 const id = ref(0);
