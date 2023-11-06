@@ -1,4 +1,5 @@
 <script setup>
+import MoreCustom from "@/components/moreCustom/MoreCustom.vue";
 import Custom from "@/components/custom/Custom.vue";
 
 import Default from "@/components/example/Default.vue";
@@ -6,11 +7,14 @@ import DragDrop from "@/components/example/DragDrop.vue";
 import SaveUndoRedo from "@/components/example/SaveUndoRedo.vue";
 
 import { ref } from "vue";
-const selectedTabName = ref("custom");
+const selectedTabName = ref("moreCustom");
 </script>
 
 <template>
   <el-tabs v-model="selectedTabName" class="tabs" :stretch="true">
+    <el-tab-pane label="MoreCustom" name="moreCustom" :lazy="true">
+      <MoreCustom title="MoreCustom" />
+    </el-tab-pane>
     <el-tab-pane label="Custom" name="custom" :lazy="true">
       <Custom title="Custom" />
     </el-tab-pane>
