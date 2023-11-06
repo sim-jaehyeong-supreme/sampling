@@ -2,7 +2,6 @@
 import { Panel, useVueFlow } from "@vue-flow/core";
 import { ref, watch, computed } from "vue";
 import IconReset from "@/components/icons/IconReset.vue";
-import IconShuffle from "@/components/icons/IconShuffle.vue";
 import IconAutoFit from "@/components/icons/IconAutoFit.vue";
 import IconSun from "@/components/icons/IconSun.vue";
 import IconMoon from "@/components/icons/IconMoon.vue";

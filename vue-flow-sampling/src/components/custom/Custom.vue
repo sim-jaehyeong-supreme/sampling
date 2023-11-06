@@ -106,7 +106,6 @@ const onDrop = (event) => {
 }
 
 onNodeClick((e) => {
-  console.log("onNodeClick");
   isVisibleDialog.value = true;
   currentModel.value = e.node;
 });

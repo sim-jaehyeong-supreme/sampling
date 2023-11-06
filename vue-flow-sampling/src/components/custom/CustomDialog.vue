@@ -14,7 +14,8 @@ defineEmits(["update:isVisibleDialog"]);
     :title="model?.label ?? 'title'"
     width="30%"
   >
-    <span>{{ model.id }}</span>
+    <div>{{ model.type }}</div>
+    <div>{{ model.id }}</div>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="$emit('update:isVisibleDialog', false)"
