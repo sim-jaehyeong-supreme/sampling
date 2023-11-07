@@ -3,6 +3,10 @@ import { ref } from 'vue';
 import { Position } from '@vue-flow/core'
 import CustomCreateNodeDialog from "@/components/moreCustom/CustomCreateNodeDialog.vue";
 
+defineProps({
+  summary: String,
+});
+
 const data = ref({
   dataSource: [
     {
@@ -124,7 +128,8 @@ const onCreateNode = (result) => {
 
   data.value.node.push({
     id: newId,
-    type: result.type,
+    type: "node",
+    subType: result.type,
     name: result.name,
     memo: result.memo,
   })
@@ -192,6 +197,9 @@ const onCreateNode = (result) => {
         </el-sub-menu>
       </el-menu>
     </div>
+    <div class="summary">
+      {{ summary }}
+    </div>
   </aside>
   <custom-create-node-dialog 
      v-model:isVisibleDialog="isVisibleDialog"
@@ -208,5 +216,9 @@ const onCreateNode = (result) => {
   &:hover {
     font-weight: 700;
   }
+}
+
+.summary {
+  max-width: 300px;
 }
 </style>

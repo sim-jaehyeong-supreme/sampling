@@ -3,7 +3,7 @@ import { VueFlow, useVueFlow } from "@vue-flow/core";
 import { Background } from "@vue-flow/background";
 import { Controls } from "@vue-flow/controls";
 import { MiniMap } from "@vue-flow/minimap";
-import { nextTick, ref, watch, markRaw } from "vue";
+import { computed, nextTick, ref, watch, markRaw } from "vue";
 import CustomSidebar from "@/components/moreCustom/CustomSidebar.vue";
 import CustomPanel from "@/components/moreCustom/CustomPanel.vue";
 import CustomDialog from "@/components/moreCustom/CustomDialog.vue";
@@ -24,6 +24,7 @@ const nodeTypes = {
 const {
   onPaneReady,
   onNodeClick,
+  onNodeDoubleClick,
   onEdgeClick,
   onConnect,
   findNode,
@@ -170,12 +171,14 @@ const onToggleIsVisibleDialog = (value) => {
   isVisibleDialog.value = value;
 }
 
+const summary = computed(() => toObject());
+
 </script>
 
 <template>
   <div class="title" style="text-align: center">{{ title }} </div>
   <div class="dndflow" @drop="onDrop">
-    <custom-sidebar />
+    <custom-sidebar :summary="summary"  />
     <vue-flow
       :class="[isDark ? 'dark' : null]"
       class="customflow"
