@@ -41,11 +41,7 @@ defineProps({
     font-size: 14px;
     box-sizing: border-box;
     transition: 0.15s ease-out;
-
-    &.process,
-    &.success {
-        background: #0069b9;
-    }
+    background: #0069b9;
 
     &.wait {
         background: #c6d3dd;
