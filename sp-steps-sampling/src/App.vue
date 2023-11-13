@@ -13,13 +13,13 @@ const active = ref(1);
     <sp-step title="thrid" />
   </sp-steps>
 
-  <sp-steps :active="active" space="300px" :isCustom="true" finishColor="#FF0000" processColor="#000000" waitColor="#a8abb2" iconSize="36px">
+  <sp-steps :active="active" space="300px" type="solid" finishColor="#FF0000" processColor="#000000" waitColor="#a8abb2" iconSize="36px">
     <sp-step title="first" />
     <sp-step title="second" />
     <sp-step title="thrid" />
   </sp-steps>
 
-  <sp-steps :active="active" space="300px" :isCustom="true" type="outline" finishColor="#FF0000" processColor="#000000" waitColor="#a8abb2" iconSize="36px">
+  <sp-steps :active="active" space="300px" type="outline" finishColor="#FF0000" processColor="#000000" waitColor="#a8abb2" iconSize="36px">
     <sp-step title="first" />
     <sp-step title="second" />
     <sp-step title="thrid" />
@@ -30,9 +30,11 @@ const active = ref(1);
     <sp-step title="second" />
     <sp-step title="thrid" />
   </sp-steps>
+
+  <sp-steps :active="active" direction="vertical"  space="300px" type="outline" finishColor="#FF0000" processColor="#000000" waitColor="#a8abb2" iconSize="36px">
+    <sp-step title="first" />
+    <sp-step title="second" />
+    <sp-step title="thrid" />
+  </sp-steps>
   
 </template>
-
-<style scoped lang="scss">
-
-</style>

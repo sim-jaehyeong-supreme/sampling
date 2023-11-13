@@ -13,13 +13,8 @@ const props = defineProps({
     space: {
         type: String,
     },
-    isCustom: {
-        type: Boolean,
-        default: false,
-    },
     type: {
         type: String,
-        default: "solid",
     },
     finishColor: {
         type: String,
@@ -40,10 +35,11 @@ const props = defineProps({
 });
 
 const compEntireStyle = computed(() => {
-    if (!props.isCustom) return {};
+    if (!props.type) return {};
 
+    let result = {};
     if (props.type === 'solid') {
-        return {
+        result = {
             '--finish-icon-border-color': props.finishColor,
             '--finish-icon-bg-color': props.finishColor,
             '--finish-icon-text-color': '#ffffff',
@@ -53,14 +49,9 @@ const compEntireStyle = computed(() => {
             '--wait-icon-border-color': props.waitColor,
             '--wait-icon-bg-color': props.waitColor,
             '--wait-icon-text-color': '#ffffff',
-            '--icon-width': props.iconSize,
-            '--icon-height': props.iconSize,
-            '--finish-text-color': props.finishColor,
-            '--process-text-color': props.processColor,
-            '--wait-text-color': props.waitColor,
         }
     } else if (props.type === 'outline') {
-        return {
+        result = {
             '--finish-icon-border-color': props.finishColor,
             '--finish-icon-bg-color': '#ffffff',
             '--finish-icon-text-color': props.finishColor,
@@ -70,20 +61,51 @@ const compEntireStyle = computed(() => {
             '--wait-icon-border-color': props.waitColor,
             '--wait-icon-bg-color': '#ffffff',
             '--wait-icon-text-color': props.waitColor,
-            '--icon-width': props.iconSize,
-            '--icon-height': props.iconSize,
-            '--finish-text-color': props.finishColor,
-            '--process-text-color': props.processColor,
-            '--wait-text-color': props.waitColor,
         };
+    } else result = {};
+
+
+    result = {
+        ...result,
+        '--icon-width': props.iconSize,
+        '--icon-height': props.iconSize,
     }
-    return {};
+
+    result = {
+        ...result,
+        '--finish-text-color': props.finishColor,
+        '--process-text-color': props.processColor,
+        '--wait-text-color': props.waitColor,
+    }
+
+    if (props.direction === 'vertical') {
+        result = {
+            ...result,
+            '--vertical-line-left': `${convertSizeToNumber(props.iconSize) / 2}px`,
+            '--vertical-main-padding-left': `${convertSizeToNumber(props.iconSize) * (10 / 24)}px`,  // default iconsize : 24px, default padding-left: 10px
+            '--vertical-title-line-height': props.iconSize,
+        }
+        
+        
+    }
+
+    return result;
+
 });
+
+const convertSizeToNumber = (size) => {
+    try {
+        return Number(size.split('px')[0]);
+    } catch {
+        // default icon size
+        return 24;
+    }
+}
 
 </script>
 
 <template>
-    <el-steps :class="isCustom ? `is-custom ${type}` : nulll" :active="active" :direction="direction"
+    <el-steps :class="[type]" :active="active" :direction="direction"
     :space="space"
     :style="compEntireStyle"
     >
@@ -121,9 +143,7 @@ const compEntireStyle = computed(() => {
             background-color: var(--wait-icon-bg-color);
         }
     }
-}
 
-.is-custom {
     ::v-deep(.el-step__icon) {
         width: var(--icon-width);
         height: var(--icon-height);
@@ -140,6 +160,17 @@ const compEntireStyle = computed(() => {
     ::v-deep(.el-step__title.is-wait) {
         color: var(--wait-text-color);
     }
-}
 
+    ::v-deep(.el-step.is-vertical .el-step__line ) {
+        left: var(--vertical-line-left);
+    }
+
+    ::v-deep(.el-step.is-vertical .el-step__main) {
+        padding-left: var(--vertical-main-padding-left);
+    }
+
+    ::v-deep(.el-step.is-vertical .el-step__title) {
+        line-height: var(--vertical-title-line-height);
+    }
+}
 </style>
