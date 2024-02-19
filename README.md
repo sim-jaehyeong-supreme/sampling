@@ -1,5 +1,5 @@
 ### Vite + Vue project create
-npm create vite@latest {project name} -- --template vue
+npm create vite@latest {project name} -- --template vue-ts
 
 ### SCSS
 npm add -D sass
