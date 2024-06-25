@@ -1,4 +1,4 @@
-import { computed, ComputedRef, InjectionKey, onMounted, onUnmounted, ref, Ref, unref, watch } from "vue";
+import { computed, ComputedRef, InjectionKey, onUnmounted, ref, Ref, unref, watch } from "vue";
 
 export type SplitterInjectionValue = {
     layout: ComputedRef<"horizontal" | "vertical">;
@@ -50,10 +50,6 @@ export const useSplitterController = () => {
     const isHovers = computed(() => {
         return isMouseovers.value.map((isMouseover) => isMouseover || unref(isResizing))
     });
-
-    onMounted(() => {
-        console.log("splitterRef", splitterRef.value);
-    })
 
     onUnmounted(() => {
         if (gutters.value && mountedPanelSize.value - 1 === gutters.value.length) {

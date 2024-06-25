@@ -1,8 +1,14 @@
 <template>
   <div class="wrap">
     <sp-splitter>
-      <sp-splitter-panel :size="15"> Panel 1 </sp-splitter-panel>
-      <sp-splitter-panel :size="85">
+      <sp-splitter-panel :size="10"> Panel 1 </sp-splitter-panel>
+      <sp-splitter-panel :size="10">
+        Panel 2
+      </sp-splitter-panel>
+      <sp-splitter-panel :size="10">
+        Panel 2
+      </sp-splitter-panel>
+      <sp-splitter-panel :size="70">
         Panel 2
       </sp-splitter-panel>
     </sp-splitter>
