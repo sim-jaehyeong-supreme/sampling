@@ -1,14 +1,18 @@
 <template>
-  <SplitterOriginal v-bind="props" ref="splitterRef" class="sp-splitter" :gutter-size="gutterSize" :style="innerStyle"
-    :pt="passThrough" @resize="isResizing = true" @resizestart="isResizing = true" @resizeend="isResizing = false">
+  <div>isResizing: {{isResizing}}</div>
+  <div>isHovers: {{ isHovers }}</div>
+  <splitter-original v-bind="props" ref="splitterRef" class="sp-splitter" :gutter-size="gutterSize"
+    :style="innerStyle" :pt="passThrough" @resize="isResizing = true" @resizestart="isResizing = true"
+    @resizeend="isResizing = false">
     <slot></slot>
-  </SplitterOriginal>
+  </splitter-original>
 </template>
 
 <script setup lang="ts">
 import { computed, defineProps, provide, withDefaults } from "vue";
 import SplitterOriginal, { SplitterProps } from "primevue/splitter";
 import { SplitterInjectionKey, useSplitterController } from "../composables/use-splitter-controller";
+
 const props = withDefaults(defineProps<SplitterProps & {
   gutterHoverSize?: number;
 }>(), {
@@ -18,7 +22,8 @@ const props = withDefaults(defineProps<SplitterProps & {
   unstyled: true,
 });
 
-const { mountedPanelSize, notifyMounted, splitterRef, isResizing, isHovers } = useSplitterController();
+const { mountedPanelSize,
+  notifyMounted, splitterRef, isResizing, isHovers } = useSplitterController();
 
 const passThrough = computed(() => {
   return {
@@ -31,12 +36,12 @@ const passThrough = computed(() => {
   };
 });
 
-const gutterSize = computed(() => {
+const currentGutterSize = computed(() => {
   return isHovers.value.some((isHover) => isHover) ? props.gutterHoverSize : props.gutterSize;
 });
 
 const innerStyle = computed(() => ({
-  "--computed-gutter-size": `${gutterSize.value}px`,
+  "--current-gutter-size": `${currentGutterSize.value}px`,
 }));
 
 provide(SplitterInjectionKey, {
@@ -45,6 +50,7 @@ provide(SplitterInjectionKey, {
   gutterHoverSize: computed(() => props.gutterHoverSize),
   mountedPanelSize,
   notifyMounted,
+  isHovers
 });
 </script>
 
@@ -59,16 +65,16 @@ provide(SplitterInjectionKey, {
   background-color: black;
 
   & .gutter-handler {
-    width: var(--computed-gutter-size) !important;
+    width: var(--current-gutter-size);
   }
 }
 
 ::v-deep(.vertical + .gutter:hover) {
-  background-color: black;
   cursor: row-resize;
+  background-color: black;
 
   & .gutter-handler {
-    width: var(--computed-gutter-size) !important;
+    height: var(--current-gutter-size);
   }
 }
 </style>

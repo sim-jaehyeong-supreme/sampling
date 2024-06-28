@@ -6,10 +6,21 @@
         Panel 2
       </sp-splitter-panel>
       <sp-splitter-panel :size="10">
-        Panel 2
+        Panel 3
       </sp-splitter-panel>
       <sp-splitter-panel :size="70">
-        Panel 2
+        <sp-splitter layout="vertical">
+          <sp-splitter-panel :size="10"> Panel 1 </sp-splitter-panel>
+          <sp-splitter-panel :size="10">
+            Panel 2
+          </sp-splitter-panel>
+          <sp-splitter-panel :size="10">
+            Panel 3
+          </sp-splitter-panel>
+          <sp-splitter-panel :size="70">
+            Panel 4
+          </sp-splitter-panel>
+        </sp-splitter>
       </sp-splitter-panel>
     </sp-splitter>
   </div>
@@ -25,5 +36,6 @@ import SpSplitterPanel from "./components/SpSplitterPanel.vue";
 .wrap {
   width: 100%;
   height: calc(100vh - 2rem);
+  padding: 16px;
 }
 </style>
